@@ -35,11 +35,8 @@ function useTerminal() {
    this method uses path of this terminal . so if curretn path is 'ssc/NC' and pathToCheck is 'tss/../tss' then if would be 
    simplified as 'ssc/NC/tss' */
   function simplifyPath(pathToCheck) {
-    console.log("-----------enter simplify");
     pathToCheck = path + "/" + pathToCheck;
     let pathToCheckArray = pathToCheck.split("/");
-    console.log(" path to check ", pathToCheck);
-    console.log(" path array to check ", pathToCheckArray);
 
     let simplifiedArray = [];
     for (let directory of pathToCheckArray) {
@@ -50,8 +47,6 @@ function useTerminal() {
         simplifiedArray.push(directory);
       }
     }
-    console.log("resualt ", simplifiedArray.join("/"));
-    console.log("-----------out of simplify");
     return simplifiedArray.join("/");
   }
 
@@ -100,13 +95,10 @@ function useTerminal() {
     else would return {ok: false, body: reason_of_failier}
   */
   function getDirectory(pathToCheck) {
-    console.log("enter getDirectory");
     const res = doesExist(pathToCheck);
-    console.log("res of doesExist ", res);
     let directory;
     if (res.ok) {
       const pathToCheckArray = res.body.split("/").slice(1);
-      console.log("pathToCheckArray", pathToCheckArray);
       let currentDirectory = directories.ssc;
       for (directory of pathToCheckArray) {
         if (directory === "") {
@@ -114,22 +106,18 @@ function useTerminal() {
         }
         currentDirectory = currentDirectory.children[directory];
       }
-      console.log("out getDirectory");
       return { ok: true, body: currentDirectory };
     }
-    console.log("out getDirectory");
     return { ok: false, body: res.body };
   }
 
   function makeNewFileDirectory(dataOfObj, pathToMake) {
-    console.log(pathToMake);
     pathToMake = pathToMake.split("/");
     let nameOfFolderToBuild = pathToMake.pop();
     let newPathkhoooooodaaaaaaaaaaa = ".";
     if (pathToMake.length > 0)
       newPathkhoooooodaaaaaaaaaaa = pathToMake.join("/");
     let res = doesExist(newPathkhoooooodaaaaaaaaaaa);
-    console.log(res);
     if (res.ok) {
       let pathToCheckArray = res.body.split("/").slice(1);
       let currentDirectory = directories.ssc;
@@ -137,13 +125,9 @@ function useTerminal() {
         currentDirectory = currentDirectory.children[child];
       }
       currentDirectory.children[nameOfFolderToBuild] = dataOfObj;
-      console.log(directories);
       setDirectories({ ...directories });
-      console.log("------- out mkdir");
       return "added";
     } else {
-      console.log(directories);
-      console.log("------- out mkdir");
       return res.body;
     }
   }
@@ -169,7 +153,6 @@ function useTerminal() {
       description: "creates a new directory",
       usage: "mkdir newFolder",
       fn: function () {
-        console.log("----- enter mkdir");
         return makeNewFileDirectory(
           {
             type: FOLDER,
@@ -202,7 +185,7 @@ function useTerminal() {
             for (let child in targetDirectory.body.children)
               if (showAll || !child.startsWith(".")) resArray.push(child);
           }
-          return resArray;
+          return resArray.join(" ");
         } else return targetDirectory.body;
       },
     },
@@ -263,7 +246,6 @@ function useTerminal() {
       description: "creat new file",
       usage: "touch newFile.txt",
       fn: function () {
-        console.log("----- enter mkdir");
         return makeNewFileDirectory(
           { type: FILE, content: "new file created by touch" },
           arguments[0]
