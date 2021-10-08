@@ -4,8 +4,11 @@ const FOLDER = "folder";
 const FILE = "file";
 
 function useTerminal() {
+  const [response, setResponse] = useState("");
+  const [path, setPath] = useState("ssc");
+  const [direcories, dispatch] = useReducer(reducer, initilDirectories);
+
   let initilDirectories = {
-    path: "ssc",
     ssc: {
       type: FOLDER,
       childs: {
@@ -26,11 +29,56 @@ function useTerminal() {
       },
     },
   };
+  function simplifyPath(pathToCheck) {
+    const pathToCheckArray = pathToCheck.split("/");
+    let currentPathArray = path.split("/");
+    for (let directory of pathToCheckArray) {
+      if (directory === ".") continue;
+      else if (directory === ".." && currentPathArray.length > 1)
+        currentPathArray.pop();
+      else {
+        currentPathArray.push(directory);
+      }
+    }
+    return currentPathArray.join("/");
+  }
+
+  function doesExist(pathToCheck) {
+    const pathToCheckArray = simplifyPath(pathToCheck).split("/");
+    let currentDirectory = direcories.ssc;
+    let pathQueried = ["ssc"];
+    for (let directory of pathToCheckArray) {
+      if (
+        currentDirectory.type === FOLDER &&
+        directory in currentDirectory.childs
+      ) {
+        currentDirectory = currentDirectory.childs[directory];
+        pathQueried.push(directory);
+      } else
+        return {
+          ok: false,
+          body:
+            "there is no '" +
+            directory +
+            "' in '" +
+            pathQueried.join("/") +
+            "'",
+        };
+    }
+    return { ok: true, body: pathToCheckArray.join("/") };
+  }
 
   const reducer = (state, action) => {
     switch (action.type) {
       case "cd":
-        return { ...state }; // todo
+        const res = doesExist(action.payload);
+        if (res.ok) {
+          setResponse(res.body);
+          setPath(res.body);
+        } else {
+          setResponse(res.body);
+        }
+        return state; // nothing to do with state in this action
       case "pwd":
         return { ...state }; // todo
       case "ls":
@@ -50,8 +98,6 @@ function useTerminal() {
     }
   };
 
-  const [response, setresponse] = useState("");
-  const [direcories, dispatch] = useReducer(reducer, initilDirectories);
   return { response, dispatch };
 }
 
