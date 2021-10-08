@@ -101,13 +101,23 @@ function useTerminal() {
           let resArray = [];
           if (targetDirectory.body.type === FOLDER) {
             for (let child in targetDirectory.body.childs)
-              if (!child.name.startsWith(".")) resArray.push(child);
+              if (!child.startsWith(".")) resArray.push(child);
           }
           setResponse(resArray);
         } else setResponse(targetDirectory.body);
         return { ...state }; // nothing to do with state in this action
 
-      case "ls -a":
+      case LS_all:
+        targetDirectory = getDirectory(action.payload);
+        if (targetDirectory.ok) {
+          let resArray = [];
+          if (targetDirectory.body.type === FOLDER) {
+            for (let child in targetDirectory.body.childs) resArray.push(child);
+          }
+          setResponse(resArray);
+        } else setResponse(targetDirectory.body);
+        return { ...state }; // nothing to do with state in this action
+
         return { ...state }; // todo
       case "rm":
         return { ...state }; // todo
