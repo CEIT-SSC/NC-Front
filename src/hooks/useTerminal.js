@@ -1,5 +1,5 @@
 import { useReducer, useState } from "react";
-import { CD, LS, LS_all, PWD, RM } from ".actions";
+import { CD, LS, LS_all, PWD, RM, MKDIR } from ".actions";
 
 const FOLDER = "folder";
 const FILE = "file";
@@ -135,8 +135,27 @@ function useTerminal() {
           setResponse(res.body);
           return state; // no change happend
         }
-      case "mkdir":
-        return { ...state }; // todo
+      case MKDIR:
+        let pathToMake = action.payload.split("/");
+        let nameOfFolderToBuild = pathToMake.pop();
+        res = doesExist(pathToMake.join("/"));
+        if (res.ok) {
+          let pathToCheckArray = res.body.split("/");
+          let newState = { ...state };
+          let currentDirectory = newState.ssc;
+          for (let child of pathToCheckArray) {
+            currentDirectory = currentDirectory.childs[child];
+          }
+          currentDirectory.childs[nameOfFolderToBuild] = {
+            type: FOLDER,
+            childs: {},
+          };
+          setResponse("added");
+          return newState; // new state after removing the file or directory
+        } else {
+          setResponse(res.body);
+          return state; // no change happend
+        }
       case "cat":
         return { ...state }; // todo
       case "touch":
