@@ -1,49 +1,57 @@
-import { useReducer, useState } from "react";
-import { CD, LS, LS_all, PWD, RM, MKDIR, TOUCH, CAT } from ".actions";
+import { useState } from "react";
 
 const FOLDER = "folder";
 const FILE = "file";
 
-let initilDirectories = {
-  ssc: {
-    type: FOLDER,
-    children: {
-      NC: {
-        type: FOLDER,
-        children: {
-          "welcome.txt": {
-            type: FILE,
-            content: "welcome to Noob Chalenge",
-          },
-          "tss.txt": {
-            type: FILE,
-            content:
-              "tsssssssssssssssssssssssssss . What does it mean? Find it yourself !",
+/* a costum hook that handels operations like "cd" , 'ls '  and ... 
+  also contains path of working. */
+function useTerminal() {
+  let initial = {
+    ssc: {
+      type: FOLDER,
+      children: {
+        NC: {
+          type: FOLDER,
+          children: {
+            "welcome.txt": {
+              type: FILE,
+              content: "welcome to Noob Chalenge",
+            },
+            "tss.txt": {
+              type: FILE,
+              content:
+                "tsssssssssssssssssssssssssss . What does it mean? Find it yourself !",
+            },
           },
         },
       },
     },
-  },
-};
+  };
 
-/* a costum hook that handels operations like "cd" , 'ls '  and ... 
-  also contains path of working. */
-function useTerminal() {
+  const [directories, setDirectories] = useState(initial);
+
   /* simplify the path. 'tss/../tss/../tss/./../tss' whould be 'tss'
    this method uses path of this terminal . so if curretn path is 'ssc/NC' and pathToCheck is 'tss/../tss' then if would be 
    simplified as 'ssc/NC/tss' */
   function simplifyPath(pathToCheck) {
-    const pathToCheckArray = pathToCheck.split("/");
-    let currentPathArray = path.split("/");
+    console.log("-----------enter simplify");
+    pathToCheck = path + "/" + pathToCheck;
+    let pathToCheckArray = pathToCheck.split("/");
+    console.log(" path to check ", pathToCheck);
+    console.log(" path array to check ", pathToCheckArray);
+
+    let simplifiedArray = [];
     for (let directory of pathToCheckArray) {
       if (directory === ".") continue;
       else if (directory === "..") {
-        if (currentPathArray.length > 1) currentPathArray.pop();
+        if (simplifiedArray.length > 1) simplifiedArray.pop();
       } else {
-        currentPathArray.push(directory);
+        simplifiedArray.push(directory);
       }
     }
-    return currentPathArray.join("/");
+    console.log("resualt ", simplifiedArray.join("/"));
+    console.log("-----------out of simplify");
+    return simplifiedArray.join("/");
   }
 
   /* 
@@ -52,8 +60,10 @@ function useTerminal() {
   this method strats from currentPath to check the path.
   */
   function doesExist(pathToCheck) {
-    const pathToCheckArray = simplifyPath(pathToCheck).split("/").slice(1); // the slice(1) is for passing the 'ssc' which makes trouble
-    let currentDirectory = direcories.ssc;
+    let pathToCheckArray = simplifyPath(pathToCheck).split("/"); // the slice(1) is for passing the 'ssc' which makes trouble
+    const firstDirectory = pathToCheckArray[0];
+    pathToCheckArray = pathToCheckArray.slice(1);
+    let currentDirectory = directories.ssc;
     let pathQueried = ["ssc"];
     for (let directory of pathToCheckArray) {
       if (
@@ -73,7 +83,14 @@ function useTerminal() {
             "'",
         };
     }
-    return { ok: true, body: pathToCheckArray.join("/") };
+    return {
+      ok: true,
+      body:
+        firstDirectory +
+        (pathToCheckArray.length > 0
+          ? "/" + pathToCheckArray.join("/")
+          : pathToCheckArray.join("/")),
+    };
   }
 
   /* 
@@ -82,85 +99,59 @@ function useTerminal() {
     else would return {ok: false, body: reason_of_failier}
   */
   function getDirectory(pathToCheck) {
+    console.log("enter getDirectory");
     const res = doesExist(pathToCheck);
+    console.log("res of doesExist ", res);
     let directory;
     if (res.ok) {
-      const pathToCheckArray = simplifyPath(res.body).split("/").slice(1);
-      let currentDirectory = direcories.ssc;
+      const pathToCheckArray = res.body.split("/").slice(1);
+      console.log("pathToCheckArray", pathToCheckArray);
+      let currentDirectory = directories.ssc;
       for (directory of pathToCheckArray) {
+        if (directory === "") {
+          continue;
+        }
         currentDirectory = currentDirectory.children[directory];
       }
+      console.log("out getDirectory");
       return { ok: true, body: currentDirectory };
     }
+    console.log("out getDirectory");
     return { ok: false, body: res.body };
   }
 
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case CD:
-        let res = doesExist(action.payload); // check if this path does exist
-        if (res.ok) {
-          setResponse({ ok: true, body: res.body });
-          setPath(res.body);
-        } else {
-          setResponse({ ok: false, body: res.body });
-        }
-        return state; // nothing to do with state in this action
+  const commands = {
+    sayhello: {
+      description: "says Hello to the presented name .",
+      usage: "sayhello <string> ",
+      fn: function () {
+        return `hello ${Array.from(arguments).join(" ")}`;
+      },
+    },
 
-      case PWD:
-        setResponse({ ok: true, body: path });
-        return state; // nothing to do with state in this action
+    pwd: {
+      description: "returns the live path user is at",
+      usage: " ",
+      fn: function () {
+        return path; // nothing to do with state in this action
+      },
+    },
 
-      case LS: // if valid path would return {ok:true, body: array_of_files_and_Folders_contained} else {ok:false, body: reason_of_failier}
-        let targetDirectory = getDirectory(action.payload);
-        if (targetDirectory.ok) {
-          let resArray = [];
-          if (targetDirectory.body.type === FOLDER) {
-            for (let child in targetDirectory.body.children)
-              if (!child.startsWith(".")) resArray.push(child);
-          }
-          setResponse({ ok: true, body: resArray });
-        } else setResponse({ ok: false, body: targetDirectory.body });
-        return state; // nothing to do with state in this action
-
-      case LS_all: // if valid path would return {ok:true, body: array_of_files_and_Folders_contained} else {ok:false, body: reason_of_failier}
-        targetDirectory = getDirectory(action.payload);
-        if (targetDirectory.ok) {
-          let resArray = [];
-          if (targetDirectory.body.type === FOLDER) {
-            for (let child in targetDirectory.body.children)
-              resArray.push(child);
-          }
-          setResponse({ ok: true, body: resArray });
-        } else setResponse({ ok: false, body: targetDirectory.body });
-        return state; // nothing to do with state in this action
-
-      case RM:
-        res = doesExist(action.payload);
+    mkdir: {
+      description: "creates a new directory",
+      usage: "mkdir newFolder",
+      fn: function () {
+        console.log("----- enter mkdir");
+        let pathToMake = arguments[0].split("/");
+        let nameOfFolderToBuild = pathToMake.pop();
+        let newPathkhoooooodaaaaaaaaaaa = ".";
+        if (pathToMake.length > 0)
+          newPathkhoooooodaaaaaaaaaaa = pathToMake.join("/");
+        let res = doesExist(newPathkhoooooodaaaaaaaaaaa);
+        console.log(res);
         if (res.ok) {
           let pathToCheckArray = res.body.split("/").slice(1);
-          let targetToRemove = pathToCheckArray.pop();
-          let newState = { ...state };
-          let currentDirectory = newState.ssc;
-          for (let child of pathToCheckArray) {
-            currentDirectory = currentDirectory.children[child];
-          }
-          delete currentDirectory.children[targetToRemove];
-          setResponse({ ok: true, body: "deleted" });
-          return newState; // new state after removing the file or directory
-        } else {
-          setResponse({ ok: false, body: res.body });
-          return state; // no change happend
-        }
-
-      case MKDIR:
-        let pathToMake = action.payload.split("/");
-        let nameOfFolderToBuild = pathToMake.pop();
-        res = doesExist(pathToMake.join("/"));
-        if (res.ok) {
-          let pathToCheckArray = res.body.split("/");
-          let newState = { ...state };
-          let currentDirectory = newState.ssc;
+          let currentDirectory = directories.ssc;
           for (let child of pathToCheckArray) {
             currentDirectory = currentDirectory.children[child];
           }
@@ -168,21 +159,104 @@ function useTerminal() {
             type: FOLDER,
             children: {},
           };
-          setResponse({ ok: true, body: "added" });
-          return newState; // new state after removing the file or directory
+          console.log(directories);
+          setDirectories({ ...directories });
+          console.log("------- out mkdir");
+          return "added";
         } else {
-          setResponse({ ok: false, body: res.body });
-          return state; // no change happend
+          console.log(directories);
+          console.log("------- out mkdir");
+          return res.body;
         }
+      },
+    },
 
-      case TOUCH:
-        pathToMake = action.payload.split("/");
-        nameOfFolderToBuild = pathToMake.pop();
-        res = doesExist(pathToMake.join("/"));
+    ls: {
+      description: "prints a list of what a directory contains",
+      usage: " ls | ls newFolder ",
+      fn: function () {
+        let inputPath = ".";
+        if (arguments.length > 0) inputPath = arguments[0];
+
+        let targetDirectory = getDirectory(inputPath);
+        if (targetDirectory.ok) {
+          let resArray = [];
+          if (targetDirectory.body.type === FOLDER) {
+            for (let child in targetDirectory.body.children)
+              if (!child.startsWith(".")) resArray.push(child);
+          }
+          return resArray;
+        } else return targetDirectory.body;
+      },
+    },
+
+    rm: {
+      description: "removes a file or directory from memory",
+      usage: " rm FileToRemove.txt ",
+      fn: function () {
+        let res = doesExist(arguments[0]);
         if (res.ok) {
           let pathToCheckArray = res.body.split("/").slice(1);
-          let newState = { ...state };
-          let currentDirectory = newState.ssc;
+          let targetToRemove = pathToCheckArray.pop();
+          let currentDirectory = directories.ssc;
+          for (let child of pathToCheckArray) {
+            currentDirectory = currentDirectory.children[child];
+          }
+          delete currentDirectory.children[targetToRemove];
+          setDirectories({ ...directories });
+          return "deleted";
+        } else {
+          return res.body;
+        }
+      },
+    },
+
+    cd: {
+      description: "changes the directory to the destinated directory",
+      usage: " cd NC/newFolder",
+      fn: function () {
+        let inputPath = ".";
+        if (arguments.length > 0) inputPath = arguments[0];
+        let res = doesExist(inputPath); // check if this path does exist
+        if (res.ok) {
+          setPath(res.body);
+          return res.body;
+        } else {
+          return res.body;
+        }
+      },
+    },
+
+    cat: {
+      description: "prints details of a file",
+      usage: " ",
+      fn: function () {
+        let targetDirectory = getDirectory(arguments[0]);
+        if (targetDirectory.ok) {
+          if (targetDirectory.body.type === FILE) {
+            return targetDirectory.body.content;
+          } else {
+            return "not a FILE";
+          }
+        } else return targetDirectory.body;
+      },
+    },
+
+    touch: {
+      description: "creat new file",
+      usage: "touch newFile.txt",
+      fn: function () {
+        console.log("----- enter mkdir");
+        let pathToMake = arguments[0].split("/");
+        let nameOfFolderToBuild = pathToMake.pop();
+        let newPathkhoooooodaaaaaaaaaaa = ".";
+        if (pathToMake.length > 0)
+          newPathkhoooooodaaaaaaaaaaa = pathToMake.join("/");
+        let res = doesExist(newPathkhoooooodaaaaaaaaaaa);
+        console.log(res);
+        if (res.ok) {
+          let pathToCheckArray = res.body.split("/").slice(1);
+          let currentDirectory = directories.ssc;
           for (let child of pathToCheckArray) {
             currentDirectory = currentDirectory.children[child];
           }
@@ -190,33 +264,22 @@ function useTerminal() {
             type: File,
             content: "",
           };
-          setResponse({ ok: true, body: "added" });
-          return newState; // new state after removing the file or directory
+          console.log(directories);
+          setDirectories({ ...directories });
+          console.log("------- out mkdir");
+          return "added";
         } else {
-          setResponse({ ok: false, body: res.body });
-          return state; // no change happend
+          console.log(directories);
+          console.log("------- out mkdir");
+          return res.body;
         }
-
-      case CAT:
-        targetDirectory = getDirectory(action.payload);
-        if (targetDirectory.ok) {
-          if (targetDirectory.body.type === FILE) {
-            setResponse({ ok: true, body: targetDirectory.body.content });
-          } else {
-            setResponse("not a FILE");
-          }
-        } else setResponse({ ok: false, body: targetDirectory.body });
-        return state; // nothing to do with state in this action
-
-      default:
-        throw new Error("invalid action");
-    }
+      },
+    },
   };
-  const [response, setResponse] = useState({ ok: true, body: "" });
-  const [path, setPath] = useState("ssc");
-  const [direcories, dispatch] = useReducer(reducer, initilDirectories);
 
-  return { response, dispatch };
+  const [path, setPath] = useState("ssc");
+
+  return commands;
 }
 
 export default useTerminal;
