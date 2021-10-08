@@ -29,6 +29,7 @@ function useTerminal() {
   };
 
   const [directories, setDirectories] = useState(initial);
+  const [path, setPath] = useState("ssc");
 
   /* simplify the path. 'tss/../tss/../tss/./../tss' whould be 'tss'
    this method uses path of this terminal . so if curretn path is 'ssc/NC' and pathToCheck is 'tss/../tss' then if would be 
@@ -184,14 +185,22 @@ function useTerminal() {
       usage: " ls | ls newFolder ",
       fn: function () {
         let inputPath = ".";
-        if (arguments.length > 0) inputPath = arguments[0];
+        let showAll = false;
+        if (arguments.length > 0) {
+          for (let arg of arguments) {
+            if (arg === "-a" || arg === "--all") showAll = true;
+            else {
+              inputPath = arg;
+            }
+          }
+        }
 
         let targetDirectory = getDirectory(inputPath);
         if (targetDirectory.ok) {
           let resArray = [];
           if (targetDirectory.body.type === FOLDER) {
             for (let child in targetDirectory.body.children)
-              if (!child.startsWith(".")) resArray.push(child);
+              if (showAll || !child.startsWith(".")) resArray.push(child);
           }
           return resArray;
         } else return targetDirectory.body;
@@ -262,8 +271,6 @@ function useTerminal() {
       },
     },
   };
-
-  const [path, setPath] = useState("ssc");
 
   return commands;
 }
