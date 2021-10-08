@@ -135,6 +135,7 @@ function useTerminal() {
           setResponse(res.body);
           return state; // no change happend
         }
+
       case MKDIR:
         let pathToMake = action.payload.split("/");
         let nameOfFolderToBuild = pathToMake.pop();
@@ -156,8 +157,18 @@ function useTerminal() {
           setResponse(res.body);
           return state; // no change happend
         }
+
       case "cat":
-        return { ...state }; // todo
+        targetDirectory = getDirectory(action.payload);
+        if (targetDirectory.ok) {
+          if (targetDirectory.body.type === FILE) {
+            setResponse(targetDirectory.body.content);
+          } else {
+            setResponse("not a FILE");
+          }
+        } else setResponse(targetDirectory.body);
+        return state; // nothing to do with state in this action
+
       case TOUCH:
         pathToMake = action.payload.split("/");
         nameOfFolderToBuild = pathToMake.pop();
@@ -179,6 +190,7 @@ function useTerminal() {
           setResponse(res.body);
           return state; // no change happend
         }
+
       default:
         throw new Error("invalid action");
     }
