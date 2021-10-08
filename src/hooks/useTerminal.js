@@ -3,33 +3,29 @@ import { CD, LS, LS_all, PWD } from ".actions";
 
 const FOLDER = "folder";
 const FILE = "file";
-
-function useTerminal() {
-  const [response, setResponse] = useState("");
-  const [path, setPath] = useState("ssc");
-  const [direcories, dispatch] = useReducer(reducer, initilDirectories);
-
-  let initilDirectories = {
-    ssc: {
-      type: FOLDER,
-      childs: {
-        NC: {
-          type: FOLDER,
-          childs: {
-            "welcome.txt": {
-              type: FILE,
-              content: "welcome to Noob Chalenge",
-            },
-            "tss.txt": {
-              type: FILE,
-              content:
-                "tsssssssssssssssssssssssssss . What does it mean? Find it yourself !",
-            },
+let initilDirectories = {
+  ssc: {
+    type: FOLDER,
+    childs: {
+      NC: {
+        type: FOLDER,
+        childs: {
+          "welcome.txt": {
+            type: FILE,
+            content: "welcome to Noob Chalenge",
+          },
+          "tss.txt": {
+            type: FILE,
+            content:
+              "tsssssssssssssssssssssssssss . What does it mean? Find it yourself !",
           },
         },
       },
     },
-  };
+  },
+};
+
+function useTerminal() {
   function simplifyPath(pathToCheck) {
     const pathToCheckArray = pathToCheck.split("/");
     let currentPathArray = path.split("/");
@@ -69,6 +65,20 @@ function useTerminal() {
     return { ok: true, body: pathToCheckArray.join("/") };
   }
 
+  function getDirectory(pathToCheck) {
+    const res = doesExist(pathToCheck);
+    let directory;
+    if (res.ok) {
+      const pathToCheckArray = simplifyPath(res.body).split("/");
+      let currentDirectory = direcories.ssc;
+      for (directory of pathToCheckArray) {
+        currentDirectory = currentDirectory.childs[directory];
+      }
+      return { ok: true, body: currentDirectory };
+    }
+    return { ok: false, body: res.body };
+  }
+
   const reducer = (state, action) => {
     switch (action.type) {
       case CD:
@@ -80,11 +90,23 @@ function useTerminal() {
           setResponse(res.body);
         }
         return state; // nothing to do with state in this action
+
       case PWD:
         setResponse(path);
         return state; // nothing to do with state in this action
-      case "ls":
-        return { ...state }; // todo
+
+      case LS:
+        const targetDirectory = getDirectory(action.payload);
+        if (targetDirectory.ok) {
+          let resArray = [];
+          if (targetDirectory.body.type === FOLDER) {
+            for (let child in targetDirectory.body.childs)
+              if (!child.name.startsWith(".")) resArray.push(child);
+          }
+          setResponse(resArray);
+        } else setResponse(targetDirectory.body);
+        return { ...state }; // nothing to do with state in this action
+
       case "ls -a":
         return { ...state }; // todo
       case "rm":
@@ -99,6 +121,9 @@ function useTerminal() {
         throw new Error("invalid action");
     }
   };
+  const [response, setResponse] = useState("");
+  const [path, setPath] = useState("ssc");
+  const [direcories, dispatch] = useReducer(reducer, initilDirectories);
 
   return { response, dispatch };
 }
