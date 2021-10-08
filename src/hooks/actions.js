@@ -4,3 +4,4 @@ export const LS_all = "ls -a";
 export const PWD = "pwd";
 export const RM = "rm";
 export const MKDIR = "mkdir";
+export const TOUCH = "touch";
