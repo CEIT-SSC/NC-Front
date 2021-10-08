@@ -1,4 +1,5 @@
 import { useReducer, useState } from "react";
+import { CD, LS, LS_all, PWD } from ".actions";
 
 const FOLDER = "folder";
 const FILE = "file";
@@ -70,7 +71,7 @@ function useTerminal() {
 
   const reducer = (state, action) => {
     switch (action.type) {
-      case "cd":
+      case CD:
         const res = doesExist(action.payload);
         if (res.ok) {
           setResponse(res.body);
@@ -79,8 +80,9 @@ function useTerminal() {
           setResponse(res.body);
         }
         return state; // nothing to do with state in this action
-      case "pwd":
-        return { ...state }; // todo
+      case PWD:
+        setResponse(path);
+        return state; // nothing to do with state in this action
       case "ls":
         return { ...state }; // todo
       case "ls -a":
