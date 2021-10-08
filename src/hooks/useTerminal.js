@@ -1,5 +1,5 @@
 import { useReducer, useState } from "react";
-import { CD, LS, LS_all, PWD } from ".actions";
+import { CD, LS, LS_all, PWD, RM } from ".actions";
 
 const FOLDER = "folder";
 const FILE = "file";
@@ -82,7 +82,7 @@ function useTerminal() {
   const reducer = (state, action) => {
     switch (action.type) {
       case CD:
-        const res = doesExist(action.payload);
+        let res = doesExist(action.payload);
         if (res.ok) {
           setResponse(res.body);
           setPath(res.body);
@@ -96,7 +96,7 @@ function useTerminal() {
         return state; // nothing to do with state in this action
 
       case LS:
-        const targetDirectory = getDirectory(action.payload);
+        let targetDirectory = getDirectory(action.payload);
         if (targetDirectory.ok) {
           let resArray = [];
           if (targetDirectory.body.type === FOLDER) {
@@ -105,7 +105,7 @@ function useTerminal() {
           }
           setResponse(resArray);
         } else setResponse(targetDirectory.body);
-        return { ...state }; // nothing to do with state in this action
+        return state; // nothing to do with state in this action
 
       case LS_all:
         targetDirectory = getDirectory(action.payload);
@@ -116,11 +116,25 @@ function useTerminal() {
           }
           setResponse(resArray);
         } else setResponse(targetDirectory.body);
-        return { ...state }; // nothing to do with state in this action
+        return state; // nothing to do with state in this action
 
-        return { ...state }; // todo
-      case "rm":
-        return { ...state }; // todo
+      case RM:
+        res = doesExist(action.payload);
+        if (res.ok) {
+          let pathToCheckArray = res.body.split("/");
+          let targetToRemove = pathToCheckArray.pop();
+          let newState = { ...state };
+          let currentDirectory = newState.ssc;
+          for (let child of pathToCheckArray) {
+            currentDirectory = currentDirectory.childs[child];
+          }
+          delete currentDirectory.childs[targetToRemove];
+          setResponse("deleted");
+          return newState; // new state after removing the file or directory
+        } else {
+          setResponse(res.body);
+          return state; // no change happend
+        }
       case "mkdir":
         return { ...state }; // todo
       case "cat":
