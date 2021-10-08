@@ -5,3 +5,4 @@ export const PWD = "pwd";
 export const RM = "rm";
 export const MKDIR = "mkdir";
 export const TOUCH = "touch";
+export const CAT = "cat";

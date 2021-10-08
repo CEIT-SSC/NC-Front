@@ -1,5 +1,5 @@
 import { useReducer, useState } from "react";
-import { CD, LS, LS_all, PWD, RM, MKDIR, TOUCH } from ".actions";
+import { CD, LS, LS_all, PWD, RM, MKDIR, TOUCH, CAT } from ".actions";
 
 const FOLDER = "folder";
 const FILE = "file";
@@ -158,7 +158,7 @@ function useTerminal() {
           return state; // no change happend
         }
 
-      case "cat":
+      case CAT:
         targetDirectory = getDirectory(action.payload);
         if (targetDirectory.ok) {
           if (targetDirectory.body.type === FILE) {
