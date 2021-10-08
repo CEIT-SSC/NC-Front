@@ -120,6 +120,33 @@ function useTerminal() {
     return { ok: false, body: res.body };
   }
 
+  function makeNewFileDirectory(dataOfObj, pathToMake) {
+    console.log(pathToMake);
+    pathToMake = pathToMake.split("/");
+    let nameOfFolderToBuild = pathToMake.pop();
+    let newPathkhoooooodaaaaaaaaaaa = ".";
+    if (pathToMake.length > 0)
+      newPathkhoooooodaaaaaaaaaaa = pathToMake.join("/");
+    let res = doesExist(newPathkhoooooodaaaaaaaaaaa);
+    console.log(res);
+    if (res.ok) {
+      let pathToCheckArray = res.body.split("/").slice(1);
+      let currentDirectory = directories.ssc;
+      for (let child of pathToCheckArray) {
+        currentDirectory = currentDirectory.children[child];
+      }
+      currentDirectory.children[nameOfFolderToBuild] = dataOfObj;
+      console.log(directories);
+      setDirectories({ ...directories });
+      console.log("------- out mkdir");
+      return "added";
+    } else {
+      console.log(directories);
+      console.log("------- out mkdir");
+      return res.body;
+    }
+  }
+
   const commands = {
     sayhello: {
       description: "says Hello to the presented name .",
@@ -142,32 +169,13 @@ function useTerminal() {
       usage: "mkdir newFolder",
       fn: function () {
         console.log("----- enter mkdir");
-        let pathToMake = arguments[0].split("/");
-        let nameOfFolderToBuild = pathToMake.pop();
-        let newPathkhoooooodaaaaaaaaaaa = ".";
-        if (pathToMake.length > 0)
-          newPathkhoooooodaaaaaaaaaaa = pathToMake.join("/");
-        let res = doesExist(newPathkhoooooodaaaaaaaaaaa);
-        console.log(res);
-        if (res.ok) {
-          let pathToCheckArray = res.body.split("/").slice(1);
-          let currentDirectory = directories.ssc;
-          for (let child of pathToCheckArray) {
-            currentDirectory = currentDirectory.children[child];
-          }
-          currentDirectory.children[nameOfFolderToBuild] = {
+        return makeNewFileDirectory(
+          {
             type: FOLDER,
             children: {},
-          };
-          console.log(directories);
-          setDirectories({ ...directories });
-          console.log("------- out mkdir");
-          return "added";
-        } else {
-          console.log(directories);
-          console.log("------- out mkdir");
-          return res.body;
-        }
+          },
+          arguments[0]
+        );
       },
     },
 
@@ -247,32 +255,10 @@ function useTerminal() {
       usage: "touch newFile.txt",
       fn: function () {
         console.log("----- enter mkdir");
-        let pathToMake = arguments[0].split("/");
-        let nameOfFolderToBuild = pathToMake.pop();
-        let newPathkhoooooodaaaaaaaaaaa = ".";
-        if (pathToMake.length > 0)
-          newPathkhoooooodaaaaaaaaaaa = pathToMake.join("/");
-        let res = doesExist(newPathkhoooooodaaaaaaaaaaa);
-        console.log(res);
-        if (res.ok) {
-          let pathToCheckArray = res.body.split("/").slice(1);
-          let currentDirectory = directories.ssc;
-          for (let child of pathToCheckArray) {
-            currentDirectory = currentDirectory.children[child];
-          }
-          currentDirectory.children[nameOfFolderToBuild] = {
-            type: File,
-            content: "",
-          };
-          console.log(directories);
-          setDirectories({ ...directories });
-          console.log("------- out mkdir");
-          return "added";
-        } else {
-          console.log(directories);
-          console.log("------- out mkdir");
-          return res.body;
-        }
+        return makeNewFileDirectory(
+          { type: FILE, content: "new file created by touch" },
+          arguments[0]
+        );
       },
     },
   };
