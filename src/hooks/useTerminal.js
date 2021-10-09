@@ -273,13 +273,12 @@ function useTerminal() {
 
     echo: {
       description: "prints the given string into terminal or given file",
-      usage: 'echo "hello world" | echo "hello world" >> filePath.txt',
+      usage: "echo hello world   |   echo hello world >> filePath.txt",
       fn: function () {
         let content = [];
-        let filePath = "";
         let mustPrintToFile = false;
         let i;
-        arguments[0] = arguments[0].slice(1);
+        arguments[0] = arguments[0];
         for (i = 0; i < arguments.length; i++) {
           if (arguments[i] === ">>") {
             mustPrintToFile = true;
@@ -289,7 +288,20 @@ function useTerminal() {
         }
 
         if (!mustPrintToFile) {
-          return content.join(" ").slice(0, -1);
+          return content.join(" ");
+        } else {
+          if (arguments.length > i + 1) {
+            let filePath = arguments[i + 1];
+            let directory = getDirectory(filePath);
+            if (directory.ok) {
+              directory.body.content = content.join(" ");
+              setDirectories(directories);
+            } else {
+              return directory.body;
+            }
+          } else {
+            return 'after ">>" must present the filePath';
+          }
         }
       },
     },
