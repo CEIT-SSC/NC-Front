@@ -55,13 +55,14 @@ function useTerminal() {
   else would return {ok:false, body: the_file_that_wasent_found}.
   this method strats from currentPath to check the path.
   */
-  function doesExist(pathToCheck) {
+  function doesExist(pathToCheck, mustBeFolder = true) {
     let pathToCheckArray = simplifyPath(pathToCheck).split("/"); // the slice(1) is for passing the 'ssc' which makes trouble
     const firstDirectory = pathToCheckArray[0];
     pathToCheckArray = pathToCheckArray.slice(1);
     let currentDirectory = directories.ssc;
     let pathQueried = ["ssc"];
-    for (let directory of pathToCheckArray) {
+    let directory;
+    for (directory of pathToCheckArray) {
       if (
         currentDirectory.type === FOLDER &&
         directory in currentDirectory.children
@@ -79,14 +80,27 @@ function useTerminal() {
             "'",
         };
     }
-    return {
-      ok: true,
-      body:
-        firstDirectory +
-        (pathToCheckArray.length > 0
-          ? "/" + pathToCheckArray.join("/")
-          : pathToCheckArray.join("/")),
-    };
+    if (currentDirectory.type === FOLDER || !mustBeFolder)
+      return {
+        ok: true,
+        body:
+          firstDirectory +
+          (pathToCheckArray.length > 0
+            ? "/" + pathToCheckArray.join("/")
+            : pathToCheckArray.join("/")),
+      };
+    else {
+      pathQueried.pop();
+      return {
+        ok: false,
+        body:
+          "there is no folder as '" +
+          directory +
+          "' in '" +
+          pathQueried.join("/") +
+          "'",
+      };
+    }
   }
 
   /* 
@@ -95,7 +109,7 @@ function useTerminal() {
     else would return {ok: false, body: reason_of_failier}
   */
   function getDirectory(pathToCheck) {
-    const res = doesExist(pathToCheck);
+    const res = doesExist(pathToCheck, false);
     let directory;
     if (res.ok) {
       const pathToCheckArray = res.body.split("/").slice(1);
@@ -183,7 +197,11 @@ function useTerminal() {
           let resArray = [];
           if (targetDirectory.body.type === FOLDER) {
             for (let child in targetDirectory.body.children)
-              if (showAll || !child.startsWith(".")) resArray.push(child);
+              if (showAll || !child.startsWith(".")) {
+                if (targetDirectory.body.children[child].type === FOLDER)
+                  resArray.push("./" + child);
+                else resArray.push(child);
+              }
           }
           return resArray.join(" ");
         } else return targetDirectory.body;
@@ -220,7 +238,7 @@ function useTerminal() {
         let res = doesExist(inputPath); // check if this path does exist
         if (res.ok) {
           setPath(res.body);
-          return res.body;
+          return "";
         } else {
           return res.body;
         }
@@ -250,6 +268,41 @@ function useTerminal() {
           { type: FILE, content: "new file created by touch" },
           arguments[0]
         );
+      },
+    },
+
+    echo: {
+      description: "prints the given string into terminal or given file",
+      usage: "echo hello world   |   echo hello world >> filePath.txt",
+      fn: function () {
+        let content = [];
+        let mustPrintToFile = false;
+        let i;
+        arguments[0] = arguments[0];
+        for (i = 0; i < arguments.length; i++) {
+          if (arguments[i] === ">>") {
+            mustPrintToFile = true;
+            break;
+          }
+          content.push(arguments[i]);
+        }
+
+        if (!mustPrintToFile) {
+          return content.join(" ");
+        } else {
+          if (arguments.length > i + 1) {
+            let filePath = arguments[i + 1];
+            let directory = getDirectory(filePath);
+            if (directory.ok) {
+              directory.body.content = content.join(" ");
+              setDirectories(directories);
+            } else {
+              return directory.body;
+            }
+          } else {
+            return 'after ">>" must present the filePath';
+          }
+        }
       },
     },
   };
