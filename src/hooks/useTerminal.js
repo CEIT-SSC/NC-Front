@@ -55,13 +55,14 @@ function useTerminal() {
   else would return {ok:false, body: the_file_that_wasent_found}.
   this method strats from currentPath to check the path.
   */
-  function doesExist(pathToCheck) {
+  function doesExist(pathToCheck, mustBeFolder = true) {
     let pathToCheckArray = simplifyPath(pathToCheck).split("/"); // the slice(1) is for passing the 'ssc' which makes trouble
     const firstDirectory = pathToCheckArray[0];
     pathToCheckArray = pathToCheckArray.slice(1);
     let currentDirectory = directories.ssc;
     let pathQueried = ["ssc"];
-    for (let directory of pathToCheckArray) {
+    let directory;
+    for (directory of pathToCheckArray) {
       if (
         currentDirectory.type === FOLDER &&
         directory in currentDirectory.children
@@ -79,14 +80,27 @@ function useTerminal() {
             "'",
         };
     }
-    return {
-      ok: true,
-      body:
-        firstDirectory +
-        (pathToCheckArray.length > 0
-          ? "/" + pathToCheckArray.join("/")
-          : pathToCheckArray.join("/")),
-    };
+    if (currentDirectory.type === FOLDER || !mustBeFolder)
+      return {
+        ok: true,
+        body:
+          firstDirectory +
+          (pathToCheckArray.length > 0
+            ? "/" + pathToCheckArray.join("/")
+            : pathToCheckArray.join("/")),
+      };
+    else {
+      pathQueried.pop();
+      return {
+        ok: false,
+        body:
+          "there is no folder as '" +
+          directory +
+          "' in '" +
+          pathQueried.join("/") +
+          "'",
+      };
+    }
   }
 
   /* 
@@ -183,7 +197,11 @@ function useTerminal() {
           let resArray = [];
           if (targetDirectory.body.type === FOLDER) {
             for (let child in targetDirectory.body.children)
-              if (showAll || !child.startsWith(".")) resArray.push(child);
+              if (showAll || !child.startsWith(".")) {
+                if (targetDirectory.body.children[child].type === FOLDER)
+                  resArray.push("./" + child);
+                else resArray.push(child);
+              }
           }
           return resArray.join(" ");
         } else return targetDirectory.body;
@@ -220,7 +238,7 @@ function useTerminal() {
         let res = doesExist(inputPath); // check if this path does exist
         if (res.ok) {
           setPath(res.body);
-          return res.body;
+          return "";
         } else {
           return res.body;
         }
