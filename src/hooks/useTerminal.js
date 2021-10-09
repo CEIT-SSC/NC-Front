@@ -109,7 +109,7 @@ function useTerminal() {
     else would return {ok: false, body: reason_of_failier}
   */
   function getDirectory(pathToCheck) {
-    const res = doesExist(pathToCheck);
+    const res = doesExist(pathToCheck, false);
     let directory;
     if (res.ok) {
       const pathToCheckArray = res.body.split("/").slice(1);
@@ -268,6 +268,29 @@ function useTerminal() {
           { type: FILE, content: "new file created by touch" },
           arguments[0]
         );
+      },
+    },
+
+    echo: {
+      description: "prints the given string into terminal or given file",
+      usage: 'echo "hello world" | echo "hello world" >> filePath.txt',
+      fn: function () {
+        let content = [];
+        let filePath = "";
+        let mustPrintToFile = false;
+        let i;
+        arguments[0] = arguments[0].slice(1);
+        for (i = 0; i < arguments.length; i++) {
+          if (arguments[i] === ">>") {
+            mustPrintToFile = true;
+            break;
+          }
+          content.push(arguments[i]);
+        }
+
+        if (!mustPrintToFile) {
+          return content.join(" ").slice(0, -1);
+        }
       },
     },
   };
