@@ -11,7 +11,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/terminal">
-          <Terminal />
+          <Terminal /> 
         </Route>
       </Switch>
     </Router>
