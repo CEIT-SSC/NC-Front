@@ -8,8 +8,10 @@ import classes from "./layout.module.css";
 function MainLayot(prpos){
     return <div className="row vh-100 w-100">
    {/* <section > */}
-   <div className={`${classes.left} col-8 d-flex flex-column justify-content-center p-5 vh-100`}>
-   {prpos.children}
+   <div className={`${classes.left} col-9  p-5 d-flex`}>
+    <div className="d-flex flex-column w-100 justify-content-center  ">
+    {prpos.children}
+    </div>
    </div>
    <div className={`${classes.sidelayout} col row `}>
    {/* Titles and text section */}
