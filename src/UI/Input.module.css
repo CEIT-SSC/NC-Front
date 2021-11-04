@@ -1,0 +1,23 @@
+.input{
+ /* background-color: red; */
+ 
+}
+.input input{
+   width: 100%;
+   text-align: end;
+   border-color: blueviolet;
+   border-radius: 8px;
+   padding-right: 3px;
+   border-width: .2rem;
+   height: 6vh;
+}
+.input a{
+    text-decoration: none;
+    color: blueviolet;
+    text-align: end;
+    margin-top: 1em;
+}
+.input a:hover{
+    cursor: pointer;
+    color: blueviolet;
+}

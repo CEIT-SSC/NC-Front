@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Button from "../UI/Button";
+import Input from "../UI/Input";
 
 function MainLayot(prpos){
     return <React.Fragment >
@@ -19,7 +20,8 @@ function MainLayot(prpos){
    {/* End of titles and text section */}
     {/* input & buttons section */}
    <div className="d-flex flex-column ">
-   <input type='text' placeholder="متن ورودی"  className="text-end w-100 h-25 my-4"></input>
+   {/* <input type='text' placeholder="متن ورودی"  className="text-end w-100 h-25 my-4"></input> */}
+    <Input placeholder=" متن ورودی "></Input>
    {/* <input type="button" className="w-25 h-25" value="submit"></input> */}
    <Button ></Button>
    </div>
