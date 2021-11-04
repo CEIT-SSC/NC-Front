@@ -6,12 +6,12 @@ import Input from "../UI/Input";
 import classes from "./layout.module.css";
 
 function MainLayot(prpos){
-    return <React.Fragment >
-   <section className="row vh-100 w-100">
-   <div className="col-8 my-auto p-5">
+    return <div className="row vh-100 w-100">
+   {/* <section > */}
+   <div className={`${classes.left} col-8 d-flex flex-column justify-content-center p-5 vh-100`}>
    {prpos.children}
    </div>
-   <div className={`${classes.sidelayout} col-4 row`}>
+   <div className={`${classes.sidelayout} col row `}>
    {/* Titles and text section */}
    <div className="p-2">
        <h1 className="text-end">تایتل</h1>
@@ -31,9 +31,10 @@ function MainLayot(prpos){
    
    </div>
   
-   </section>
-
-  </React.Fragment>;
+   {/* </section> */}
+   </div>
+  
+  ;
 }
 
 
