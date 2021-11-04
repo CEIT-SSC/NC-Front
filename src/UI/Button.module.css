@@ -1,0 +1,8 @@
+.button{
+    color: rgb(57, 20, 92);
+    background: rgb(0,255,238);
+    background: linear-gradient(95deg, rgba(0,255,238,1) 0%, rgba(125,237,16,1) 100%);
+    border-radius: 12px;
+    /* width: ; */
+    border-color: transparent;
+}

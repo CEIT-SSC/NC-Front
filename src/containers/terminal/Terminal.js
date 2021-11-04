@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SimpleTerminal from "../../components/terminal/SimpleTerminal";
-import MainLayot from "../../Layots/MainLayot";
+import MainLayot from "../../Layouts/MainLayout";
 
 function Terminal() {
   // return <React.Fragment >
