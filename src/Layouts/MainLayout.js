@@ -7,11 +7,11 @@ import classes from "./layout.module.css";
 
 function MainLayot(prpos){
     return <React.Fragment >
-   <section className="row vh-100">
-   <div className="col-7 my-auto p-5  ">
+   <section className="row vh-100 w-100">
+   <div className="col-8 my-auto p-5">
    {prpos.children}
    </div>
-   <div className={`${classes.sidelayout} col-5  d-flex row  justify-content-around`}>
+   <div className={`${classes.sidelayout} col-4 row`}>
    {/* Titles and text section */}
    <div className="p-2">
        <h1 className="text-end">تایتل</h1>
@@ -21,12 +21,14 @@ function MainLayot(prpos){
        </p>
    </div>
    {/* End of titles and text section */}
+
     {/* input & buttons section */}
    <div className="d-flex flex-column ">
   <Input placeholder=" متن ورودی "></Input>
   <Button ></Button>
    </div>
    {/* End of input and buttons */}
+   
    </div>
   
    </section>

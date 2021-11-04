@@ -1,3 +1,7 @@
 .sidelayout{
-    background-color: #d4b9b0;
+    background-color: #f08b84;
+    
+}
+section{
+    overflow-x: hidden;
 }
