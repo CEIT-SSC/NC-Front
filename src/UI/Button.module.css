@@ -2,7 +2,7 @@
     --button-text : rgb(57, 20, 92);
     --button-background: rgb(0,255,238);
     --button-background-gradient: linear-gradient(95deg, rgba(0,255,238,1) 0%, rgba(125,237,16,1) 100%);
-    --button-shadow:rgb(128, 128, 128);
+    --button-shadow:rgba(127,127,127,0.51);
 }
 
 
@@ -12,5 +12,7 @@
     background: var(--button-background-gradient);
     border-radius: 12px;
     border-color: transparent;
-    box-shadow: 4px 4px var(--button-shadow);
+    padding: 3px;
+    -webkit-box-shadow: 5px 6px 13px 0px var(--button-shadow); 
+    box-shadow: 5px 6px 13px 0px var(--button-shadow);
 }
