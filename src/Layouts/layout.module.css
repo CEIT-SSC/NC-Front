@@ -21,6 +21,10 @@
     background-color: var(--left-terminal-background);
     background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
     
+    
+}
+.left>div{
+    width: 70%;
 }
 .left p{
     text-align: center;
@@ -31,7 +35,8 @@
 }
 .buttons{
     z-index: 2;
-    margin-bottom: -1.5rem;
+    /* margin-bottom: -1.5rem; */
+    margin:0px 8px -1.8rem 8px;
 }
 .buttons button{
 
@@ -39,7 +44,7 @@
     height: 1rem;
     border-radius: 50%;
     border-color: transparent; 
-    margin:0px 5px;
+    margin:4px 6px;
     
 }
 .buttons button:nth-child(1){
