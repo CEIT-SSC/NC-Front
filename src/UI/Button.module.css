@@ -10,9 +10,10 @@
     color: var(--button-text);
     background: var(--button-background);
     background: var(--button-background-gradient);
-    border-radius: 12px;
+    border-radius: 8px;
     border-color: transparent;
     padding: 3px;
     -webkit-box-shadow: 5px 6px 13px 0px var(--button-shadow); 
     box-shadow: 5px 6px 13px 0px var(--button-shadow);
+    width: 29%;
 }

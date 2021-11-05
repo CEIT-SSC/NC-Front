@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./Button.module.css";
 
 function Button (){
-    return <button className={`${classes.button} w-50`} >
+    return <button className={`${classes.button} `} >
        !بزن بریم
     </button>;
 
