@@ -17,7 +17,7 @@
    border-radius: 8px;
    padding-right: 3px;
    border-width: .2rem;
-   height: 6vh;
+   height: 8vh;
    caret-color: var(--input-caret-color);
 }
 .input a{
