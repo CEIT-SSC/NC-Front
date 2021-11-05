@@ -11,7 +11,7 @@
  margin: 2rem 0 2rem 0;
 }
 .input input{
-   width: 88%;
+   width: 75%;
    text-align: end;
    border-color: var(--input-border-color);
    border-radius: 8px;
@@ -19,6 +19,7 @@
    border-width: .2rem;
    height: 8vh;
    caret-color: var(--input-caret-color);
+   margin-right: 1.3em;
 }
 .input a{
     text-decoration: none;
@@ -36,6 +37,7 @@
     font-size: 1rem;
     padding: 0 0.3em;
     background-color:var(--input-label-background-color);
+    margin-right: 1.3em;
     margin-bottom: -.2rem;
     padding: 0px .4rem;
     z-index: 2;
