@@ -18,7 +18,7 @@ function MainLayot(prpos){
    {/* End of left Container */}
    
    {/* Titles and text section */}
-   <div className="p-2">
+   <div className={`${classes.dummytext} p-2`}>
        <h1 className="text-end">تایتل</h1>
        <h3 className="text-end">ساب تایتل</h3>
        <p className="text-end">

@@ -1,16 +1,28 @@
+:root{
+    --sidelayout-background:#fcdcd9;
+    --dummytext-color:#3d2378;
+    --left-terminal-background:#FBAB7E;
+    --title-color:rgb(122, 120, 120);
+
+}
+
+
 .sidelayout{
-    background-color: #fcdcd9;
+    background-color: var(--sidelayout-background);
     
 }
+.dummytext{
+    color: var(--dummytext-color) ;
+}
 .left{
-    background-color: #FBAB7E;
+    background-color: var(--left-terminal-background);
     background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
     
 }
 .left p{
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: gray;
+    color: var(--title-color);
     margin-bottom: -2rem;
     z-index: 2;
 }
