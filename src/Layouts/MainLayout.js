@@ -9,7 +9,7 @@ function MainLayot(prpos){
     return <div className="row vh-100 w-100">
  {/* left Container */}
    <div className={`${classes.left} col-9  p-5 d-flex`}>
-    <div className="d-flex flex-column w-100 justify-content-center  ">
+    <div className="d-flex flex-column w-75 justify-content-center mx-auto ">
         <p>AUT N00B CHALLANGE</p>
     {prpos.children}
     </div>
