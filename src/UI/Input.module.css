@@ -3,6 +3,7 @@
     ;
     --input-caret-color:#a79bb9
     ;
+    --input-label-background-color:#fcdcd9;
 }
 
 
@@ -29,3 +30,16 @@
     cursor: pointer;
     color: var(--input-border-color);
 }
+.input span{
+    
+    text-align: end;
+    font-size: 1rem;
+    padding: 0 0.3em;
+    background-color:var(--input-label-background-color);
+    margin-bottom: -.2rem;
+    padding: 0px .4rem;
+    z-index: 2;
+    
+  }
+
+
