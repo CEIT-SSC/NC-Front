@@ -3,6 +3,9 @@
     --dummytext-color:#3d2378;
     --left-terminal-background:#FBAB7E;
     --title-color:rgb(122, 120, 120);
+    --green-button:#28c240;
+    --red-button:#ee514e;
+    --orange-button:#f1b043;
 
 }
 
@@ -25,4 +28,26 @@
     color: var(--title-color);
     margin-bottom: -2rem;
     z-index: 2;
+}
+.buttons{
+    z-index: 2;
+    margin-bottom: -1.5rem;
+}
+.buttons button{
+
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border-color: transparent; 
+    margin:0px 5px;
+    
+}
+.buttons button:nth-child(1){
+    background-color: var(--red-button);
+}
+.buttons button:nth-child(2){
+    background-color: var(--orange-button);
+}
+.buttons button:nth-child(3){
+    background-color: var(--green-button);
 }

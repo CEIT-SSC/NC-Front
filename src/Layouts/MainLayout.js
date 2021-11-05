@@ -11,6 +11,11 @@ function MainLayot(prpos){
    <div className={`${classes.left} col-9  p-5 d-flex`}>
     <div className="d-flex flex-column w-75 justify-content-center mx-auto ">
         <p>AUT N00B CHALLANGE</p>
+        <div className={classes.buttons}>
+            <button></button>
+            <button></button>
+            <button></button>
+        </div>
     {prpos.children}
     </div>
    </div>
