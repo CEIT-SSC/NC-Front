@@ -7,13 +7,16 @@ import classes from "./layout.module.css";
 
 function MainLayot(prpos){
     return <div className="row vh-100 w-100">
-   {/* <section > */}
+ {/* left Container */}
    <div className={`${classes.left} col-9  p-5 d-flex`}>
     <div className="d-flex flex-column w-100 justify-content-center  ">
+        <p>AUT N00B CHALLANGE</p>
     {prpos.children}
     </div>
    </div>
    <div className={`${classes.sidelayout} col row `}>
+   {/* End of left Container */}
+   
    {/* Titles and text section */}
    <div className="p-2">
        <h1 className="text-end">تایتل</h1>
@@ -33,7 +36,7 @@ function MainLayot(prpos){
    
    </div>
   
-   {/* </section> */}
+  
    </div>
   
   ;

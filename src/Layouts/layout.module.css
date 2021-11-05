@@ -7,3 +7,10 @@
     background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
     
 }
+.left p{
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: gray;
+    margin-bottom: -2rem;
+    z-index: 2;
+}
