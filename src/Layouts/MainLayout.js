@@ -30,7 +30,7 @@ function MainLayot(prpos){
     {/* input & buttons section */}
    <div className="d-flex flex-column ">
   <Input placeholder=" متن ورودی " title="لیبل ورودی"></Input>
-  <Button ></Button>
+  <Button></Button>
    </div>
    {/* End of input and buttons */}
    
