@@ -16,7 +16,7 @@
    border-color: var(--input-border-color);
    border-radius: 8px;
    padding-right: 3px;
-   border-width: .2rem;
+   border-width: .15rem;
    height: 8vh;
    caret-color: var(--input-caret-color);
    margin:0 auto;
