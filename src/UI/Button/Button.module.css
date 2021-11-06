@@ -1,0 +1,21 @@
+:root{
+    --button-text : rgb(57, 20, 92);
+    --button-background: rgb(0,255,238);
+    --button-background-gradient: linear-gradient(to right, rgba(0,255,238,1) 0%, rgba(125,237,16,1) 51%);
+    --button-shadow:rgba(127,127,127,0.51);
+}
+
+
+.button{
+    color: var(--button-text);
+    background-color: #08AEEA;
+    background-image: linear-gradient(to right, #08AEEA 0%, #2AF598 51%);
+    background-size: 200% auto;
+    border-radius: 8px;
+    border-width: 0px;
+    padding: 3px 8px;
+    -webkit-box-shadow: 5px 6px 13px 0px var(--button-shadow); 
+    box-shadow: 5px 6px 13px 0px var(--button-shadow);
+    width: 29%;
+    margin-left: 2.4rem;
+}
