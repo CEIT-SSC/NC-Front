@@ -12,16 +12,23 @@
 
 .sidelayout{
     background-color: var(--sidelayout-background);
-    
 }
+.sidelayout > div{
+    /* height: 600px; */
+}
+
 .dummytext{
     color: var(--dummytext-color) ;
+    /* height: 60vh; */
+     /* overflow-y: scroll;  */
+}
+.dummytext>p{
+    /* height: 40vh; */
+    /* overflow-y: scroll;  */
 }
 .left{
     background-color: var(--left-terminal-background);
-    background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
-    
-    
+    background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);  
 }
 .left>div{
     width: 70%;
@@ -36,7 +43,6 @@
 }
 .buttons{
     z-index: 2;
-    /* margin-bottom: -1.5rem; */
     margin:0px 8px -1.8rem 8px;
 }
 .buttons button{

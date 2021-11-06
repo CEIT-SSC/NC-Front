@@ -17,4 +17,5 @@
     -webkit-box-shadow: 5px 6px 13px 0px var(--button-shadow); 
     box-shadow: 5px 6px 13px 0px var(--button-shadow);
     width: 29%;
+    margin-left: 2.4rem;
 }

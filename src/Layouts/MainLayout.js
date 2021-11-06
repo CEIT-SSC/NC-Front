@@ -19,12 +19,13 @@ function MainLayot(prpos){
     {prpos.children}
     </div>
    </div>
-   <div className={`${classes.sidelayout} col row `}>
+  
    {/* End of left Container */}
-   
-   {/* Titles and text section */}
+   <div className={`${classes.sidelayout} col row d-flex `}>
+ 
+       {/* Titles and text section */}
    <div className={`${classes.dummytext} p-2`}>
-       <h1 className="text-end">تایتل</h1>
+      <h1 className="text-end">تایتل</h1>
        <h3 className="text-end">ساب تایتل</h3>
        <p className="text-end">
            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد کتابهای زیادی در شصت و سه درصد گذشته حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی            
@@ -34,11 +35,12 @@ function MainLayot(prpos){
    {/* End of titles and text section */}
 
     {/* input & buttons section */}
-   <div className="d-flex flex-column ">
+   <div className="d-flex flex-column justify-content-center mx-auto">
   <Input placeholder=" متن ورودی " title="لیبل ورودی"></Input>
   <Button></Button>
    </div>
    {/* End of input and buttons */}
+
    
    </div>
   
