@@ -13,18 +13,12 @@
 .sidelayout{
     background-color: var(--sidelayout-background);
 }
-.sidelayout > div{
-    /* height: 600px; */
-}
-
 .dummytext{
     color: var(--dummytext-color) ;
-    /* height: 60vh; */
-     /* overflow-y: scroll;  */
 }
-.dummytext>p{
-    /* height: 40vh; */
-    /* overflow-y: scroll;  */
+.dummytext p{
+    height: 49vh;
+    overflow-y: auto; 
 }
 .left{
     background-color: var(--left-terminal-background);
