@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import ScoreLine from "../../components/scoreBoard/ScoreLine";
 import stryleModule from "./scoreBoard.module.css";
+import convertNumberstoFarsi from "../../Utils/lanConverter";
 
 const initialState = [
   { name: "اسم شرکت کننده", score: "150", room: "ترمینال" },
@@ -10,7 +11,7 @@ const initialState = [
     score: "100",
     room: "ترمینال",
   },
-  { name: "اسم شرکت کننده", score: "90", room: "ترمینال" },
+  { name: "big is big is very very big", score: "90", room: "ترمینال" },
   { name: "اسم شرکت کننده", score: "84", room: "ترمینال" },
   {
     name: " اسم شرکت کننده که اسم بلد نبوده بذاره",
@@ -19,7 +20,7 @@ const initialState = [
   },
   { name: "اسم شرکت کننده که مرض داشته", score: "84", room: "ترمینال" },
   { name: "اسم", score: "84", room: "ترمینال" },
-  { name: "اسم شرکت کننده", score: "84", room: "الگوریتم" },
+  { name: "eng name", score: "84", room: "الگوریتم" },
   { name: "اسم شرکت کننده", score: "84", room: "ترمینال" },
   { name: "اسم شرکت کننده", score: "84", room: "ترمینال" },
   { name: "اسم شرکت کننده", score: "84", room: "ترمینال" },
@@ -51,9 +52,9 @@ function ScoreBoard() {
           return (
             <ScoreLine
               name={lineInfo.name}
-              score={lineInfo.score}
+              score={convertNumberstoFarsi(lineInfo.score)}
               room={lineInfo.room}
-              rank={rank}
+              rank={convertNumberstoFarsi(rank)}
             />
           );
         })}

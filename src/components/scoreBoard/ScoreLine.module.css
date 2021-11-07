@@ -18,20 +18,21 @@
   color: var(--scoreBoard-titles);
   font-weight: normal;
   margin-top: 0px;
+  font-size: 0.9rem;
 }
 
 .rightSide,
 .leftSide {
   text-overflow: ellipsis;
   display: flex;
-  text-align: center;
+  text-align: end;
   flex-flow: row nowrap;
   justify-content: space-between;
   justify-items: center;
 }
 
 .rightSide {
-  width: 50%;
+  width: 40%;
 }
 .leftSide {
   width: 23%;
@@ -40,7 +41,7 @@
   width: 70%;
 }
 .rightSide span:last-child {
-  width: 17%;
+  width: 20%;
 }
 
 .leftSide span:first-child {
@@ -48,6 +49,10 @@
 }
 .leftSide span:last-child {
   width: 50%;
+}
+
+.rightSide span:first-child {
+  justify-content: flex-end;
 }
 
 span {
@@ -58,4 +63,5 @@ span {
   padding-bottom: 0.5rem;
   color: var(--scoreBoard-infosColor);
   font-weight: bold;
+  font-size: 1.1rem;
 }
