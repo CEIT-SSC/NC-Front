@@ -38,7 +38,7 @@ function ScoreBoard() {
   const [linesInfos, setLinesInfos] = useState(initialState);
   let rank = 0;
   return (
-    <section className="scoreBoardPan">
+    <section className={`${stryleModule.scoreBoardPan}`}>
       <div className={`${stryleModule.table}`}>
         <ScoreLine
           name="شرکت کننده"

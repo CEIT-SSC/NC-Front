@@ -14,9 +14,7 @@ function App() {
           </MainLayot>
         </Route>
         <Route path="/scoreBoard">
-          <MainLayot>
-            <ScoreBoard />
-          </MainLayot>
+          <ScoreBoard />
         </Route>
       </Switch>
     </Router>
