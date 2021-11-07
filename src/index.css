@@ -29,13 +29,13 @@ code {
 @font-face {
   font-family: "Cascadia";
   src: local("Cascadia"),
-    url("./fonts/woff2/CascadiaCode.woff2") format("woff2"),
-    url("./fonts/ttf/CascadiaCode.ttf") format("ttf");
+    url("./assets/fonts/woff2/CascadiaCode.woff2") format("woff2"),
+    url("./assets/fonts/ttf/CascadiaCode.ttf") format("ttf");
 }
 
 @font-face {
   font-family: "Estedad";
   src: local("Estedad"),
-    url("./fonts/Estedad-v5.0/Estedad[wght\,kshd].woff2") format("woff2"),
-    url("./fonts/Estedad-v5.0/Estedad[wght\,kshd].ttf") format("ttf");
+    url("./assets/fonts/Estedad-v5.0/Estedad[wght\,kshd].woff2") format("woff2"),
+    url("./assets/fonts/Estedad-v5.0/Estedad[wght\,kshd].ttf") format("ttf");
 }
