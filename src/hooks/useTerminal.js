@@ -7,7 +7,7 @@ const FILE = "file";
   also contains path of working. */
 function useTerminal() {
   let initial = {
-    ssc: {
+    SSC: {
       type: FOLDER,
       children: {
         NC: {
@@ -29,11 +29,11 @@ function useTerminal() {
   };
 
   const [directories, setDirectories] = useState(initial);
-  const [path, setPath] = useState("ssc");
+  const [path, setPath] = useState("SSC");
 
   /* simplify the path. 'tss/../tss/../tss/./../tss' whould be 'tss'
-   this method uses path of this terminal . so if curretn path is 'ssc/NC' and pathToCheck is 'tss/../tss' then if would be 
-   simplified as 'ssc/NC/tss' */
+   this method uses path of this terminal . so if curretn path is 'SSC/NC' and pathToCheck is 'tss/../tss' then if would be 
+   simplified as 'SSC/NC/tss' */
   function simplifyPath(pathToCheck) {
     pathToCheck = path + "/" + pathToCheck;
     let pathToCheckArray = pathToCheck.split("/");
@@ -56,11 +56,11 @@ function useTerminal() {
   this method strats from currentPath to check the path.
   */
   function doesExist(pathToCheck, mustBeFolder = true) {
-    let pathToCheckArray = simplifyPath(pathToCheck).split("/"); // the slice(1) is for passing the 'ssc' which makes trouble
+    let pathToCheckArray = simplifyPath(pathToCheck).split("/"); // the slice(1) is for passing the 'SSC' which makes trouble
     const firstDirectory = pathToCheckArray[0];
     pathToCheckArray = pathToCheckArray.slice(1);
-    let currentDirectory = directories.ssc;
-    let pathQueried = ["ssc"];
+    let currentDirectory = directories.SSC;
+    let pathQueried = ["SSC"];
     let directory;
     for (directory of pathToCheckArray) {
       if (
@@ -113,7 +113,7 @@ function useTerminal() {
     let directory;
     if (res.ok) {
       const pathToCheckArray = res.body.split("/").slice(1);
-      let currentDirectory = directories.ssc;
+      let currentDirectory = directories.SSC;
       for (directory of pathToCheckArray) {
         if (directory === "") {
           continue;
@@ -134,7 +134,7 @@ function useTerminal() {
     let res = doesExist(newPathkhoooooodaaaaaaaaaaa);
     if (res.ok) {
       let pathToCheckArray = res.body.split("/").slice(1);
-      let currentDirectory = directories.ssc;
+      let currentDirectory = directories.SSC;
       for (let child of pathToCheckArray) {
         currentDirectory = currentDirectory.children[child];
       }
@@ -216,7 +216,7 @@ function useTerminal() {
         if (res.ok) {
           let pathToCheckArray = res.body.split("/").slice(1);
           let targetToRemove = pathToCheckArray.pop();
-          let currentDirectory = directories.ssc;
+          let currentDirectory = directories.SSC;
           for (let child of pathToCheckArray) {
             currentDirectory = currentDirectory.children[child];
           }
@@ -306,7 +306,7 @@ function useTerminal() {
     },
   };
 
-  return commands;
+  return { commands, path };
 }
 
 export default useTerminal;

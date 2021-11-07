@@ -34,12 +34,3 @@
   border-color: transparent;
   margin: 4px 6px;
 }
-.buttons button:nth-child(1) {
-  background-color: var(--red-button);
-}
-.buttons button:nth-child(2) {
-  background-color: var(--orange-button);
-}
-.buttons button:nth-child(3) {
-  background-color: var(--green-button);
-}
