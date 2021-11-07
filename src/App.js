@@ -1,6 +1,6 @@
 import React from "react";
 import Terminal from "./containers/terminal/Terminal";
-import scoreBoard from "./containers/scoreBoard/scoreBoard";
+import ScoreBoard from "./containers/scoreBoard/ScoreBoard";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
           <Terminal />
         </Route>
         <Route path="/scoreBoard">
-          <scoreBoard />
+          <ScoreBoard />
         </Route>
       </Switch>
     </Router>
