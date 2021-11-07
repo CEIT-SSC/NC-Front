@@ -15,8 +15,9 @@
   background-color: inherit;
 }
 .header span {
-  color: var(--dummytext-color);
+  color: var(--scoreBoard-titles);
   font-weight: normal;
+  margin-top: 0px;
 }
 
 .rightSide,
@@ -25,35 +26,36 @@
   display: flex;
   text-align: center;
   flex-flow: row nowrap;
-  justify-content: space-around;
+  justify-content: space-between;
   justify-items: center;
 }
 
 .rightSide {
-  width: 55%;
+  width: 50%;
 }
 .leftSide {
-  width: 35%;
+  width: 23%;
 }
 .rightSide span:first-child {
-  width: 65%;
+  width: 70%;
 }
 .rightSide span:last-child {
-  width: 20%;
+  width: 17%;
 }
 
 .leftSide span:first-child {
-  width: 35%;
+  width: 40%;
 }
 .leftSide span:last-child {
-  width: 35%;
+  width: 50%;
 }
 
 span {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.3rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   color: var(--scoreBoard-infosColor);
   font-weight: bold;
 }
