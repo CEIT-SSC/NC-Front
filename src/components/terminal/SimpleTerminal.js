@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Terminal from "react-console-emulator";
 import useTerminal from "../../hooks/useTerminal";
 

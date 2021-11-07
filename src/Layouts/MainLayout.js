@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import Button from "../UI/Button";
-import Input from "../UI/Input";
+import React from "react";
+import Button from "../UI/Button/Button";
+import Input from "../UI/Input/Input";
 
 
 import classes from "./layout.module.css";
