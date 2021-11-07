@@ -1,0 +1,67 @@
+.linescore {
+  display: flex;
+  min-height: 2.5rem;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  justify-items: center;
+  background-color: var(--scoreLine-color);
+  border-radius: 9px;
+  margin-top: 0.7rem;
+  overflow: hidden;
+}
+
+.header {
+  border: none;
+  background-color: inherit;
+}
+.header span {
+  color: var(--scoreBoard-titles);
+  font-weight: normal;
+  margin-top: 0px;
+  font-size: 0.9rem;
+}
+
+.rightSide,
+.leftSide {
+  text-overflow: ellipsis;
+  display: flex;
+  text-align: end;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  justify-items: center;
+}
+
+.rightSide {
+  width: 40%;
+}
+.leftSide {
+  width: 23%;
+}
+.rightSide span:first-child {
+  width: 70%;
+}
+.rightSide span:last-child {
+  width: 20%;
+}
+
+.leftSide span:first-child {
+  width: 40%;
+}
+.leftSide span:last-child {
+  width: 50%;
+}
+
+.rightSide span:first-child {
+  justify-content: flex-end;
+}
+
+.linescore span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: var(--scoreBoard-infosColor);
+  font-weight: bold;
+  font-size: 1.1rem;
+}

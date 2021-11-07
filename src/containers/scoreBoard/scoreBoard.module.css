@@ -1,0 +1,18 @@
+.scoreBoardPan {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: linear-gradient(62deg, #deb75e 0%, #da8e8e 100%);
+}
+
+.table {
+  background-color: var(--scoreBoard-background-color);
+  width: 50%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border-radius: 17px;
+  padding-top: 0.4rem;
+}

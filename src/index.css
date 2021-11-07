@@ -1,13 +1,41 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Estedad", "Cascadia", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+:root {
+  --sidelayout-background: #fcdcd9;
+  --dummytext-color: #3d2378;
+  --scoreBoard-infosColor: #4c0047;
+  --left-terminal-background: #fbab7e;
+  --title-color: rgb(122, 120, 120);
+  --green-button: #28c240;
+  --scoreLine-color: #e9d6d5;
+  --scoreBoard-background-color: #f9eee3;
+  --red-button: #ee514e;
+  --orange-button: #f1b043;
+  --scoreBoard-titles: #99008d;
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+@font-face {
+  font-family: "Cascadia";
+  src: local("Cascadia"),
+    url("./assets/fonts/woff2/CascadiaCode.woff2") format("woff2"),
+    url("./assets/fonts/ttf/CascadiaCode.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "Estedad";
+  src: local("Estedad"),
+    url("./assets/fonts/Estedad-v5.0/Estedad[wght\,kshd].woff2") format("woff2"),
+    url("./assets/fonts/Estedad-v5.0/Estedad[wght\,kshd].ttf") format("ttf");
 }
