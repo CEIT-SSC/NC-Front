@@ -15,7 +15,7 @@
   background-color: inherit;
 }
 .header span {
-  color: var(--scoreBoard-titles);
+  color: var(--scoreBoard-titles) !important;
   font-weight: normal;
   margin-top: 0px;
   font-size: 0.9rem;

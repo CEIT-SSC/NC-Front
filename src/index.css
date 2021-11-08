@@ -8,6 +8,7 @@ body {
 }
 
 :root {
+  --terminal-color: #f6e6d6;
   --sidelayout-background: #fcdcd9;
   --dummytext-color: #3d2378;
   --scoreBoard-infosColor: #4c0047;
