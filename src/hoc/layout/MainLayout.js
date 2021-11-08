@@ -34,8 +34,10 @@ function MainLayot(prpos) {
 
         {/* input & buttons section */}
         <div className="d-flex flex-column justify-content-center mx-auto">
-          <Input placeholder=" متن ورودی " title="لیبل ورودی"></Input>
-          <Button></Button>
+          <Input placeholder=" متن ورودی " title="لیبل ورودی" />
+          <span className={`${classes.button}`}>
+            <Button />
+          </span>
         </div>
         {/* End of input and buttons */}
       </div>

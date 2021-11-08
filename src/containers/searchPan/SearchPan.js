@@ -7,8 +7,8 @@ export default function SearchPan() {
     <div className={`${styleModule.searchPan}`}>
       <div className={`${styleModule.middlePan}`}>
         <div className={`${styleModule.dummytext}`}>
-          <h1 className="text-end">تایتل</h1>
-          <h3 className="text-end">ساب تایتل</h3>
+          <h3 className="text-end">تایتل</h3>
+          <h5 className="text-end">ساب تایتل</h5>
           <p className="text-end">
             لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
             استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در
@@ -20,7 +20,9 @@ export default function SearchPan() {
           </p>
         </div>
         <div className={`${styleModule.inputPart}`}>
-          <Input placeholder=" متن ورودی " title="لیبل ورودی" />
+          <div className="w-100">
+            <Input placeholder=" متن ورودی " title="لیبل ورودی" />
+          </div>
           <Button />
         </div>
       </div>

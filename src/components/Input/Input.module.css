@@ -24,7 +24,7 @@
   color: var(--input-border-color);
   text-align: end;
   margin-top: 0.4em;
-  margin-right: 3.1rem;
+  margin-right: 15%;
 }
 .input a:hover {
   cursor: pointer;
