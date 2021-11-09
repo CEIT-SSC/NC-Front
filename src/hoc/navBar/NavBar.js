@@ -5,17 +5,20 @@ import { Link } from "react-router-dom";
 export default function NavBar() {
   return (
     <div className={`${styleModule.navBar}`}>
-      <span>
-        <img src={logo} alt="logo" width="90px" />
-        <span>اسم شرکت کننده</span>
+      {/*<span className={`${styleModule.logoBack}`}></span>
+         <img src={logo} alt="logo" width="100px" /> */}
+      <span className={`${styleModule.leftSpan}`}>
+        <img src={logo} alt="logo" width="100px" />
+
+        <p>اسم شرکت کننده</p>
         <span className={`${styleModule.devider}`}></span>
       </span>
       <span>
         <span className={`${styleModule.devider}`}></span>
 
-        <div>نقشه</div>
+        <p>نقشه</p>
         <Link to="scoreBoard">
-          <div>رتبه بندی</div>
+          <p>رتبه بندی</p>
         </Link>
       </span>
     </div>

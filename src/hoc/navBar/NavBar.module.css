@@ -10,13 +10,36 @@
   background-color: var(--navbar-color);
   font-family: "Estedad";
   color: var(--text-color);
+  --left-margin: 1vw;
+  --logo-size: 160px;
 }
 
 .navBar img {
-  margin-left: 2rem;
+  width: 70px;
   margin-right: 3rem;
-  position: relative;
-  top: 1vh;
+  margin-left: 2.2rem;
+  padding: 5px;
+}
+
+.navBarr img {
+  width: var(--logo-size);
+  margin-right: 3rem;
+  position: absolute;
+  top: calc((var(--navbar-length) / 2) - 4vh);
+  padding: 1.3rem;
+  z-index: 1;
+  left: var(--left-margin);
+}
+
+.logoBalck {
+  position: absolute;
+  top: calc((var(--navbar-length) / 2) - 5.5vh);
+  left: calc(var(--left-margin) - 1.7vw);
+  border-radius: 50%;
+  width: var(--logo-size);
+  height: var(--logo-size);
+  z-index: 0;
+  background-color: var(--navbar-color);
 }
 
 .devider {
@@ -24,13 +47,16 @@
   border-radius: 50%;
 }
 
-.navBar span div {
+.navBar span p {
   display: inline-block;
 }
-.navBar span,
-.navBar span div {
+.navBar p {
   text-decoration: none;
   color: var(--text-color);
   margin: 0px 2rem;
   font-size: 1.4rem;
+}
+
+.navBar .leftttttSpan {
+  margin-left: calc(var(--logo-size) + var(--left-margin) + 2rem);
 }
