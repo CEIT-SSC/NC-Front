@@ -20,6 +20,8 @@ body {
   --red-button: #ee514e;
   --orange-button: #f1b043;
   --scoreBoard-titles: #99008d;
+
+  --navbar-length: 6.4vh;
 }
 
 code {
