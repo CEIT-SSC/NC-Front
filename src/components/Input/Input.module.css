@@ -1,48 +1,43 @@
-:root{
-    --input-border-color:#524165
-    ;
-    --input-caret-color:#a79bb9
-    ;
-    --input-label-background-color:#fcdcd9;
+:root {
+  --input-border-color: #524165;
+  --input-caret-color: #a79bb9;
+  --input-label-background-color: #fcdcd9;
 }
 
+.input {
+  margin: 2rem 0 2rem 0;
+}
 
-.input{
- margin: 2rem 0 2rem 0;
+.input input {
+  width: 80%;
+  text-align: end;
+  border-color: var(--input-border-color);
+  border-radius: 8px;
+  padding-right: 3px;
+  border-width: 0.15rem;
+  height: 8vh;
+  caret-color: var(--input-caret-color);
+  margin: 0 auto;
 }
-.input input{
-   width: 80%;
-   text-align: end;
-   border-color: var(--input-border-color);
-   border-radius: 8px;
-   padding-right: 3px;
-   border-width: .15rem;
-   height: 8vh;
-   caret-color: var(--input-caret-color);
-   margin:0 auto;
+.input a {
+  text-decoration: none;
+  color: var(--input-border-color);
+  text-align: end;
+  margin-top: 0.4em;
+  margin-right: 15%;
 }
-.input a{
-    text-decoration: none;
-    color: var(--input-border-color);
-    text-align: end;
-    margin-top: .4em;
-    margin-right:3.1rem;
+.input a:hover {
+  cursor: pointer;
+  color: var(--input-border-color);
 }
-.input a:hover{
-    cursor: pointer;
-    color: var(--input-border-color);
+.input span {
+  text-align: end;
+  font-size: 1rem;
+  padding: 0 0.3em;
+  background-color: var(--input-label-background-color);
+  margin-right: 15%;
+  margin-bottom: -0.2rem;
+  padding: 0px 0.4rem;
+  z-index: 2;
+  color: var(--input-border-color);
 }
-.input span{
-    
-    text-align: end;
-    font-size: 1rem;
-    padding: 0 0.3em;
-    background-color:var(--input-label-background-color);
-    margin-right:3.1rem;
-    margin-bottom: -.2rem;
-    padding: 0px .4rem;
-    z-index: 2;
-    color: var(--input-border-color);
-  }
-
-
