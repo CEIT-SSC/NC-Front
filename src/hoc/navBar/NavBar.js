@@ -6,13 +6,17 @@ export default function NavBar() {
   return (
     <div className={`${styleModule.navBar}`}>
       <span>
-        <img src={logo} alt="logo" width="55px" />
+        <img src={logo} alt="logo" width="90px" />
         <span>اسم شرکت کننده</span>
-        <span className={`${styleModule.devider}`}>.</span>
+        <span className={`${styleModule.devider}`}></span>
       </span>
       <span>
-        <span className={`${styleModule.devider}`}>.</span>
-        <Link to="scoreBoard">رتبه بندی</Link>
+        <span className={`${styleModule.devider}`}></span>
+
+        <div>نقشه</div>
+        <Link to="scoreBoard">
+          <div>رتبه بندی</div>
+        </Link>
       </span>
     </div>
   );

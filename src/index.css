@@ -8,6 +8,8 @@ body {
 }
 
 :root {
+  --text-color: white;
+  --navbar-color: #4c0053;
   --terminal-color: #f6e6d6;
   --sidelayout-background: #fcdcd9;
   --dummytext-color: #3d2378;
@@ -21,7 +23,7 @@ body {
   --orange-button: #f1b043;
   --scoreBoard-titles: #99008d;
 
-  --navbar-length: 6.4vh;
+  --navbar-length: 5vh;
 }
 
 code {

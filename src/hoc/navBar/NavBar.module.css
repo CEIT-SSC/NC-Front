@@ -1,12 +1,36 @@
 .navBar {
   position: fixed;
   top: 0;
+  width: 100%;
   height: var(--navbar-length);
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
+  background-color: var(--navbar-color);
+  font-family: "Estedad";
+  color: var(--text-color);
 }
 
 .navBar img {
+  margin-left: 2rem;
+  margin-right: 3rem;
+  position: relative;
+  top: 1vh;
+}
+
+.devider {
+  border-right: 2px solid var(--text-color);
+  border-radius: 50%;
+}
+
+.navBar span div {
+  display: inline-block;
+}
+.navBar span,
+.navBar span div {
+  text-decoration: none;
+  color: var(--text-color);
+  margin: 0px 2rem;
+  font-size: 1.4rem;
 }
