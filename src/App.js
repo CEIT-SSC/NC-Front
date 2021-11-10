@@ -4,10 +4,12 @@ import ScoreBoard from "./containers/scoreBoard/ScoreBoard";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainLayot from "./hoc/layout/MainLayout";
 import SearchPan from "./containers/searchPan/SearchPan";
+import NavBar from "./hoc/navBar/NavBar";
 
 function App() {
   return (
     <Router>
+      <NavBar />
       <Switch>
         <Route path="/search">
           <SearchPan />

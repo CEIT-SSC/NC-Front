@@ -5,8 +5,13 @@
   color: var(--dummytext-color);
 }
 .dummytext p {
-  height: 49vh;
+  height: 49%;
   overflow-y: auto;
+}
+
+.layout {
+  height: 100vh;
+  padding-top: var(--navbar-length);
 }
 .left {
   background-color: var(--left-terminal-background);
@@ -14,7 +19,7 @@
 }
 .left > div {
   width: 70%;
-  height: 85vh;
+  height: 85%;
 }
 .left p {
   text-align: center;

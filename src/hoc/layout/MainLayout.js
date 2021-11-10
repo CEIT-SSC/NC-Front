@@ -6,7 +6,7 @@ import classes from "./layout.module.css";
 
 function MainLayot(prpos) {
   return (
-    <div className="row vh-100 w-100">
+    <div className={`row  w-100 ${classes.layout}`}>
       {/* left Container */}
       <div className={`${classes.left} col-9  p-5 d-flex`}>
         <div className="d-flex flex-column  justify-content-center mx-auto ">
