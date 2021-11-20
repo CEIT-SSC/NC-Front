@@ -1,0 +1,22 @@
+.signupPage{
+    display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: linear-gradient(62deg, #deb75e 0%, #da8e8e 100%);
+}
+.dataForm{
+ background-color: rgba(244, 247, 103, 0.575);
+ padding: 2rem;
+ border-radius: 4%;
+}
+.dataForm label{
+    float: right;
+    margin-bottom: .4rem;
+    margin-top: .4rem;
+}
+.dataForm button[type="submit"]{
+    margin-left: 6.7rem;
+    margin-right: 6.7rem;
+}
