@@ -26,10 +26,10 @@ function App() {
           <ScoreBoard />
         </Route>
         <Route path="/signup">
-        <SignUp />
+          <SignUp />
         </Route>
         <Route path="/login">
-        <LogIn />
+          <LogIn />
         </Route>
       </Switch>
     </Router>

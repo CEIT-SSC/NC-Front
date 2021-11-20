@@ -1,69 +1,60 @@
-import React  from "react";
-import { useState } from "react";
+import React ,{useState}  from "react";
 
 import classes from "./SignUp.module.css";
 
  
 function LogInSignUp() {
 
-  const [enteredName, setEnteredName] = useState('');
+  const [enteredName, setEnteredName] = useState("");
   const [enteredNameIsValid, setEnteredNameIsValid] = useState(true);
 
-  const [enteredPassword, setEnteredPassword] = useState('');
+  const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredPasswordIsValid, setEnteredPasswordIsValid] = useState(true);
 
-   const [enteredSecpass, setEnteredSecpass] = useState('');
+  const [enteredSecpass, setEnteredSecpass] = useState("");
   const [enteredSecpassIsValid, setEnteredSecpassIsValid] = useState(true);
 
-  const[passwordmatch,setIspasswordmatch]=useState('true');
+  const [passwordmatch, setIspasswordmatch] = useState("true");
 
-  const nameChangeHandler= (event)=>{
+  const nameChangeHandler = (event) => {
     setEnteredName(event.target.value);
-    console.log(enteredName.trim);
-  }
-  const passChangeHandler= (event)=>{
+  };
+  const passChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
-  }
-  const secondpassChangeHandler= (event)=>{
+  };
+  const secondpassChangeHandler = (event) => {
     setEnteredSecpass(event.target.value);
-  }
+  };
 
-const formValidityCheck = event =>{
- 
-  event.preventDefault();
+  const formValidityCheck = (event) => {
+    event.preventDefault();
 
+    if (enteredName.trim() === "") {
+      setEnteredNameIsValid(false);
+    } else {
+      setEnteredNameIsValid(true);
+    }
 
-  if(enteredName.trim() === ''){
-    setEnteredNameIsValid(false);
-  }
-  else{
-    setEnteredNameIsValid(true);
-  }
-  
-    
+    if (enteredPassword.trim() === "") setEnteredPasswordIsValid(false);
+    else {
+      setEnteredPasswordIsValid(true);
+    }
 
-  if(enteredPassword.trim() ==='')
-    setEnteredPasswordIsValid(false);
-  else{
-    setEnteredPasswordIsValid(true);
-  }
-   
-
-  if(enteredSecpass.trim() ==='')
-      setEnteredSecpassIsValid(false);
-    else{
+    if (enteredSecpass.trim() === "") setEnteredSecpassIsValid(false);
+    else {
       setEnteredSecpassIsValid(true);
     }
-   
 
-  if(enteredPassword.trim() !=='' && enteredSecpass.trim() !=='' && enteredPassword!==enteredSecpass)
-    setIspasswordmatch(false);
-    else{
+    if (
+      enteredPassword.trim() !== "" &&
+      enteredSecpass.trim() !== "" &&
+      enteredPassword !== enteredSecpass
+    )
+      setIspasswordmatch(false);
+    else {
       setIspasswordmatch(true);
     }
-    
-  
-}
+  };
 
 
 
