@@ -4,7 +4,7 @@ import ScoreBoard from "./containers/scoreBoard/ScoreBoard";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainLayot from "./hoc/layout/MainLayout";
 import SearchPan from "./containers/searchPan/SearchPan";
-import SignUp from "./containers/logInSignUp/SignUp";
+import SignUp from "./containers/SignUp/SignUp";
 import NavBar from "./hoc/navBar/NavBar";
 
 
