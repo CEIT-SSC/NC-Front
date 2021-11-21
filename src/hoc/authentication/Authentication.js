@@ -126,13 +126,13 @@ function Authentication(props) {
             <button
               onClick={() => {
                 console.log("ahhhhhhhhhhhhhhhhhhh");
-                dispatch(
-                  buttonAction(
-                    enteredName,
-                    enteredPassword,
-                    enterndStudent_number
-                  )
-                );
+                const info = {
+                  username: enteredName,
+                  password: enteredPassword,
+                  student_number: enterndStudent_number,
+                };
+                console.log(info);
+                dispatch(buttonAction(info));
               }}
               className="btn btn-primary w-50"
             >

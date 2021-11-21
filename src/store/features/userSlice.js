@@ -1,13 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { login, register, logout } from "../../api/user";
 
-const loginUser = createAsyncThunk(
-  "user/loginUser",
-  async (username, password, student_number) => {
-    const response = await login(username, password, student_number);
-    return response.data;
-  }
-);
+const loginUser = createAsyncThunk("user/loginUser", async (info) => {
+  const response = await login({
+    username: info.username,
+    password: info.password,
+    student_number: info.student_number,
+  });
+  return response.data;
+});
 
 const registerUser = createAsyncThunk(
   "user/registerUser",

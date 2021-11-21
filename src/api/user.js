@@ -1,14 +1,13 @@
 import axios from "axios";
 import apiAddresses from "./info";
 
-async function login(userName, password, student_number) {
-  console.log("tsssss login api");
+async function login(info) {
   return await axios.post(
     apiAddresses + "/user/login",
     {
-      username: userName,
-      password: password,
-      student_number: student_number,
+      username: "" + info.username,
+      password: "" + info.password,
+      student_number: "" + info.student_number,
     },
     {
       headers: {
@@ -18,20 +17,18 @@ async function login(userName, password, student_number) {
   );
 }
 
-async function register(userName, password, student_number) {
-  return await axios.post(
-    apiAddresses + "/user/register",
-    {
-      username: userName,
-      password: password,
-      student_number: student_number,
+async function register(info) {
+  const sentInfo = {
+    username: "" + info.username,
+    password: "" + info.password,
+    student_number: "" + info.student_number,
+  };
+  console.log(sentInfo);
+  return await axios.post(apiAddresses + "/user/register", sentInfo, {
+    headers: {
+      "Content-Type": "application/json",
     },
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  });
 }
 
 async function logout(token) {
