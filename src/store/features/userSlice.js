@@ -8,6 +8,7 @@ const loginUser = createAsyncThunk(
     return response.data;
   }
 );
+
 const registerUser = createAsyncThunk(
   "user/registerUser",
   async (username, password, student_number) => {
@@ -15,6 +16,7 @@ const registerUser = createAsyncThunk(
     return response.data;
   }
 );
+
 const logoutUser = createAsyncThunk("user/logoutUser", async (token) => {
   const response = await logout(token);
   return response.data;
@@ -22,11 +24,13 @@ const logoutUser = createAsyncThunk("user/logoutUser", async (token) => {
 
 export const userSlice = createSlice({
   name: "user",
+
   initialState: {
     username: "",
     student_number: "",
     token: "",
   },
+
   reducers: {
     setUsername: (state, action) => {
       state.username = action.payload;
@@ -38,11 +42,22 @@ export const userSlice = createSlice({
       state.token = action.payload;
     },
   },
+
   extraReducers: {
     [loginUser.fulfilled]: (state, action) => {
+      console.log(action.payload);
       state.username = action.payload.username;
       state.student_number = action.payload.student_number;
       state.token = action.payload.token;
+    },
+    [logoutUser.fulfilled]: (state, action) => {
+      console.log(action.payload);
+      state.username = "";
+      state.student_number = "";
+      state.token = "";
+    },
+    [registerUser.fulfilled]: (state, action) => {
+      console.log(action.payload);
     },
   },
 });

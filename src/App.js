@@ -7,7 +7,7 @@ import SearchPan from "./containers/searchPan/SearchPan";
 import SignUp from "./containers/SignUp/SignUp";
 import NavBar from "./hoc/navBar/NavBar";
 import LogIn from "./containers/LogIn/LogIn";
-import store from "./app/store";
+import store from "./store/store";
 import { Provider } from "react-redux";
 
 function App() {

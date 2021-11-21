@@ -2,6 +2,7 @@ import axios from "axios";
 import apiAddresses from "./info";
 
 async function login(userName, password, student_number) {
+  console.log("tsssss login api");
   return await axios.post(apiAddresses + "/user/login", {
     username: userName,
     password: password,
