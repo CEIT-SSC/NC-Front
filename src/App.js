@@ -7,31 +7,34 @@ import SearchPan from "./containers/searchPan/SearchPan";
 import SignUp from "./containers/SignUp/SignUp";
 import NavBar from "./hoc/navBar/NavBar";
 import LogIn from "./containers/LogIn/LogIn";
-
+import store from "./store/store";
+import { Provider } from "react-redux";
 
 function App() {
   return (
     <Router>
-      <NavBar />
-      <Switch>
-        <Route path="/search">
-          <SearchPan />
-        </Route>
-        <Route path="/terminal">
-          <MainLayot>
-            <Terminal />
-          </MainLayot>
-        </Route>
-        <Route path="/scoreBoard">
-          <ScoreBoard />
-        </Route>
-        <Route path="/signup">
-          <SignUp />
-        </Route>
-        <Route path="/login">
-          <LogIn />
-        </Route>
-      </Switch>
+      <Provider store={store}>
+        <NavBar />
+        <Switch>
+          <Route path="/search">
+            <SearchPan />
+          </Route>
+          <Route path="/terminal">
+            <MainLayot>
+              <Terminal />
+            </MainLayot>
+          </Route>
+          <Route path="/scoreBoard">
+            <ScoreBoard />
+          </Route>
+          <Route path="/signup">
+            <SignUp />
+          </Route>
+          <Route path="/login">
+            <LogIn />
+          </Route>
+        </Switch>
+      </Provider>
     </Router>
   );
 }
